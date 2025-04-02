@@ -24,7 +24,7 @@ const Tickets = () => {
   useEffect(() => {
     const fetchIssues = async () => {
       try {
-        const response = await axios.get('http://api.solveitsl.site:3000/api/issueService/issues');
+        const response = await axios.get('https://api.solveitsl.site:3000/api/issueService/issues');
         setIssues(response.data);
       } catch (error) {
         setError('Failed to fetch issues');

@@ -21,7 +21,7 @@ function SignUp() {
 
     setLoading(true);
     try {
-      await axios.post('http://api.solveitsl.site:3000/api/userService/auth/signup', {
+      await axios.post('https://api.solveitsl.site:3000/api/userService/auth/signup', {
         firstname,
         lastname,
         fullname,
