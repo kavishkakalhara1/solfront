@@ -17,7 +17,7 @@ function SignIn() {
     setError('');
     dispatch(signInStart());
     try {
-      const response = await axios.post('http://localhost:3000/api/userService/auth/signin', { email, password });
+      const response = await axios.post('http://api.solveitsl.site:3000/api/userService/auth/signin', { email, password });
       dispatch(signInSuccess(response.data));
       navigate('/'); // Navigate to home page on successful sign-in
     } catch (error) {
@@ -34,25 +34,25 @@ function SignIn() {
   };
 
   return (
-    <div className="max-w-sm mx-auto mt-36 p-4 ring-2 ring-teal-400 rounded-2xl  bg-white hover:shadow-2xl shadow-md">
-      <div className="flex justify-center"><h2 className="text-2xl mb-4">Sign In</h2></div>
-      {error && <p className="text-red-500 mb-4">{error}</p>}
+    <div className="max-w-sm p-4 mx-auto bg-white shadow-md mt-36 ring-2 ring-teal-400 rounded-2xl hover:shadow-2xl">
+      <div className="flex justify-center"><h2 className="mb-4 text-2xl">Sign In</h2></div>
+      {error && <p className="mb-4 text-red-500">{error}</p>}
       <input
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="w-full p-2 mb-4  rounded-2xl"
+        className="w-full p-2 mb-4 rounded-2xl"
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-2 mb-4  rounded-2xl"
+        className="w-full p-2 mb-4 rounded-2xl"
       />
       <div className="flex justify-center">
-      <button onClick={handleSignIn} className="w-32 bg-teal-800 hover:bg-teal-500 text-white font-medium p-2 rounded-2xl" disabled={loading}>
+      <button onClick={handleSignIn} className="w-32 p-2 font-medium text-white bg-teal-800 hover:bg-teal-500 rounded-2xl" disabled={loading}>
         {loading ? 'Signing In...' : 'Sign In'}
       </button>
       </div>
