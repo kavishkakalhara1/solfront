@@ -11,6 +11,7 @@ export default defineConfig({
         target: 'http://16.171.44.248:3000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/userService/, ''),
+        secure: false, // Add this if the backend uses self-signed certificates
       },
     },
     allowedHosts: ['solveitsl.site'], // Add this line
