@@ -21,7 +21,7 @@ function SignUp() {
 
     setLoading(true);
     try {
-      await axios.post('http://localhost:3000/api/userService/auth/signup', {
+      await axios.post('http://api.solveitsl.site:3000/api/userService/auth/signup', {
         firstname,
         lastname,
         fullname,
@@ -42,8 +42,8 @@ function SignUp() {
   };
 
   return (
-    <div className="max-w-sm mx-auto mt-14 p-4 ring-2 ring-teal-400 rounded-2xl  bg-white hover:shadow-2xl shadow-md">
-      <div className="flex justify-center"><h2 className="text-2xl mb-4 ">Sign Up</h2></div>
+    <div className="max-w-sm p-4 mx-auto bg-white shadow-md mt-14 ring-2 ring-teal-400 rounded-2xl hover:shadow-2xl">
+      <div className="flex justify-center"><h2 className="mb-4 text-2xl ">Sign Up</h2></div>
       <input
         type="text"
         placeholder="First Name"
@@ -82,7 +82,7 @@ function SignUp() {
       <div className="flex justify-center">
       <button
         onClick={handleSignUp}
-        className="w-32 bg-teal-800 hover:bg-teal-500 text-white font-medium p-2 rounded-2xl"
+        className="w-32 p-2 font-medium text-white bg-teal-800 hover:bg-teal-500 rounded-2xl"
         disabled={loading}
       >
         {loading ? 'Signing Up...' : 'Sign Up'}
