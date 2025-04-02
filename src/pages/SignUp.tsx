@@ -21,7 +21,7 @@ function SignUp() {
 
     setLoading(true);
     try {
-      await axios.post('http://16.171.44.248:3000/api/userService/auth/signup', {
+      await axios.post('https://16.171.44.248:3000/api/userService/auth/signup', {
         firstname,
         lastname,
         fullname,
