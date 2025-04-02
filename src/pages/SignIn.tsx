@@ -17,7 +17,7 @@ function SignIn() {
     setError('');
     dispatch(signInStart());
     try {
-      const response = await axios.post('https://api.solveitsl.site:3000/api/userService/auth/signin', { email, password });
+      const response = await axios.post('http://16.171.44.248:3000/api/userService/auth/signin', { email, password });
       dispatch(signInSuccess(response.data));
       navigate('/'); // Navigate to home page on successful sign-in
     } catch (error) {
