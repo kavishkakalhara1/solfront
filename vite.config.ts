@@ -14,6 +14,6 @@ export default defineConfig({
         secure: false, // Add this if the backend uses self-signed certificates
       },
     },
-    allowedHosts: ['solveitsl.site'], // Add this line
+    allowedHosts: ['solveitsl.site', 'www.solveitsl.site'], // Add this line
   },
 });
