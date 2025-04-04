@@ -23,9 +23,8 @@ pipeline {
                         sudo apt update
                         sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
                         sudo usermod -aG docker jenkins
-                        sudo systemctl restart jenkins
                         '''
-                        echo "Docker installed! Restarting Jenkins is required."
+                        echo "Docker installed successfully! Restarting Jenkins is required."
                         error("Docker installed. Please restart Jenkins and rerun the pipeline.")
                     } else {
                         echo "Docker is already installed."
