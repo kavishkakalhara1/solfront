@@ -13,12 +13,5 @@ pipeline {
        
     }
 
-    post {
-        always {
-            echo 'Frontend Pipeline completed!'
-        }
-        success {
-            build job: 'SolveIt-Backend-Pipeline' // Trigger Backend Job
-        }
-    }
+  
 }
