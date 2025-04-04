@@ -12,7 +12,7 @@ pipeline {
                     def dockerInstalled = sh(script: 'command -v docker', returnStatus: true)
 
                     if (dockerInstalled != 0) {
-                        echo "Docker is not installed. Attempting to install..."
+                        echo "Docker is not installed. Installing Docker..."
                         sh '''
                         sudo apt update
                         sudo apt install -y ca-certificates curl gnupg
@@ -25,7 +25,7 @@ pipeline {
                         sudo usermod -aG docker jenkins
                         sudo systemctl restart jenkins
                         '''
-                        echo "Docker installation completed. Restart Jenkins and rerun the pipeline."
+                        echo "Docker installed! Restarting Jenkins is required."
                         error("Docker installed. Please restart Jenkins and rerun the pipeline.")
                     } else {
                         echo "Docker is already installed."
