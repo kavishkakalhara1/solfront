@@ -8,18 +8,9 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t solveit-frontend .'
-            }
-        }
+       
 
-        stage('Push Docker Image') {
-            steps {
-                sh 'docker tag solveit-frontend chamodijayakody/solveit-frontend'
-                sh 'docker push chamodijayakody/solveit-frontend'
-            }
-        }
+       
     }
 
     post {
