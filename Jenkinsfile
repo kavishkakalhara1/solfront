@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/ChamodiJayakody/SolveIt-frontend.git'
+                git branch: 'main', url: 'https://github.com/kavishkakalhara1/solfront.git'
             }
         }
 
