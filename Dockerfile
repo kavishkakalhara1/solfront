@@ -7,16 +7,15 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Stage 2: Run
-FROM node:18-slim
+# Stage 2: Nginx Serve
+FROM nginx:alpine
 
-WORKDIR /app
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package*.json ./
+# Remove default nginx site
+RUN rm -rf /usr/share/nginx/html/*
 
-RUN npm install --omit=dev
+# Copy built frontend to Nginx html directory
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-EXPOSE 5000
+EXPOSE 80
 
-# IMPORTANT: use npx to run Vite in preview mode and bind to all interfaces
-CMD ["npx", "vite", "preview", "--host", "--port", "5000"]
+CMD ["nginx", "-g", "daemon off;"]
