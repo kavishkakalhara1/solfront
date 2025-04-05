@@ -16,7 +16,12 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    bat "docker build -t %IMAGE_NAME% ."
+                    // Use Windows batch syntax
+                    bat """
+                    echo Building Docker image...
+                    docker --version
+                    docker build -t %IMAGE_NAME% .
+                    """
                 }
             }
         }
