@@ -16,4 +16,7 @@ export default defineConfig({
     },
     allowedHosts: ['solveitsl.site', 'www.solveitsl.site'], // Add this line
   },
+  preview: {
+    allowedHosts: ['solveitsl.site', 'www.solveitsl.site'], // Add this block
+  },
 });
