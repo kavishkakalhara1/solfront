@@ -24,7 +24,7 @@ function Header() {
     <header className="z-10 p-4 text-black bg-white shadow-md">
       <nav className="flex items-center justify-between">
         <div className='flex justify-items-start'>
-        <div className="text-3xl font-semibold text-teal-500">Solve2</div>
+        <div className="text-3xl font-semibold text-teal-500">Solve</div>
         <div className="text-3xl font-bold text-gray-700">IT</div>
         </div>
         <div className="flex items-center space-x-4">
