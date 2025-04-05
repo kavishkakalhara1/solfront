@@ -16,7 +16,7 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package*.json ./  
  # Copy package files if necessary
 
-RUN rm -rf node_modules    # Clean existing node_modules folder
+
 RUN npm install --omit=dev   # Install production dependencies
 
 EXPOSE 5000  
