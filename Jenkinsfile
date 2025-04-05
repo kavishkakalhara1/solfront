@@ -6,7 +6,6 @@ pipeline {
     }
 
     stages {
-        
 
         stage('Clone Repository') {
             steps {
@@ -17,10 +16,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t ${IMAGE_NAME} ."
+                    bat "docker build -t %IMAGE_NAME% ."
                 }
             }
         }
     }
 }
-// hello 
