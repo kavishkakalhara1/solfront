@@ -92,7 +92,7 @@ pipeline {
                         ssh -o StrictHostKeyChecking=no ubuntu@13.61.21.9 "
                             sudo docker pull virajsamarasinghe/frontend:latest && \
                             sudo docker stop frontend || true && \
-                            sudo docker rm frontend || true && \
+                            sudo docker rm -f frontend || true && \
                             sudo docker run -d --name frontend -p 5000:5000 virajsamarasinghe/frontend:latest"
                     '''
                 }
