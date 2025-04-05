@@ -1,26 +1,25 @@
-# Stage 1: Build (React/Vite App)
+# Stage 1: Build
 FROM node:18 AS builder
 
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run build  # This will create the static files in /dist directory
 
-# Stage 2: Nginx Serve (Serve static files and proxy API requests)
-FROM nginx:alpine
+# Stage 2: Run
+FROM node:18-slim
 
-# Remove default nginx site
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
+COPY --from=builder /app/dist ./dist   
+#Copy the static files to the new image
+COPY --from=builder /app/package*.json ./   
+# Copy package files if necessary
 
-# Copy built frontend to Nginx html directory
-COPY --from=builder /app/dist /usr/share/nginx/html
+RUN npm install --omit=dev   # Install production dependencies
 
-# Copy your Nginx configuration to the container
-COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 5000  
+# Expose port 5000
 
-# Expose port 80 (HTTP)
-EXPOSE 80
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Use npx to run Vite in preview mode (Vite's static file server)
+CMD ["npx", "vite", "preview", "--host", "--port", "5000"]
