@@ -8,7 +8,7 @@ export default defineConfig({
     host: true,
     proxy: {
       '/api/': {
-        target: 'http://16.171.44.248:3000',
+        target: 'http://13.61.21.9:3000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/userService/, ''),
         secure: false, // Add this if the backend uses self-signed certificates
