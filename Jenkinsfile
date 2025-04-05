@@ -93,7 +93,7 @@ pipeline {
                             sudo docker pull virajsamarasinghe/frontend:latest && \
                             sudo docker stop frontend || true && \
                             sudo docker rm frontend || true && \
-                            sudo docker run -d --name frontend -p 3000:3000 virajsamarasinghe/frontend:latest"
+                            sudo docker run -d --name frontend -p 5000:5000 virajsamarasinghe/frontend:latest"
                     '''
                 }
             }
