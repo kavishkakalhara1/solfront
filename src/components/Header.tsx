@@ -21,15 +21,15 @@ function Header() {
   };
 
   return (
-    <header className="bg-white text-black p-4 shadow-md z-10">
-      <nav className="flex justify-between items-center">
+    <header className="z-10 p-4 text-black bg-white shadow-md">
+      <nav className="flex items-center justify-between">
         <div className='flex justify-items-start'>
-        <div className="text-3xl font-semibold text-teal-500">Solve</div>
+        <div className="text-3xl font-semibold text-teal-500">Solve2</div>
         <div className="text-3xl font-bold text-gray-700">IT</div>
         </div>
-        <div className="space-x-4 flex items-center">
-          {!currentUser && <Link to="/sign-in" className="hover:text-teal-500 font-medium text-xl">Sign In</Link>}
-          {!currentUser && <Link to="/sign-up" className="hover:text-teal-500 font-medium text-xl">Sign Up</Link>}
+        <div className="flex items-center space-x-4">
+          {!currentUser && <Link to="/sign-in" className="text-xl font-medium hover:text-teal-500">Sign In</Link>}
+          {!currentUser && <Link to="/sign-up" className="text-xl font-medium hover:text-teal-500">Sign Up</Link>}
           {currentUser && (
             <div className="relative">
               {currentUser.profilePicture ? (
@@ -43,13 +43,13 @@ function Header() {
                 <FaUserCircle size={40} className="cursor-pointer" onClick={toggleDropdown} />
               )}
               {dropdownVisible && (
-                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg">
+                <div className="absolute right-0 w-48 mt-2 text-black bg-white rounded shadow-lg">
                   <div className="px-4 py-2 border-b">
                     <p className="font-semibold">{currentUser.fullname}</p>
                     <p className="text-sm text-gray-600">{currentUser.email}</p>
                   </div>
                   
-                  <button onClick={handleSignOut} className="block w-full text-left px-4 py-2 hover:bg-gray-200">
+                  <button onClick={handleSignOut} className="block w-full px-4 py-2 text-left hover:bg-gray-200">
                     Sign Out
                   </button>
                 </div>
