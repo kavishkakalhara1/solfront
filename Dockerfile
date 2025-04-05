@@ -12,10 +12,11 @@ FROM node:18-slim
 
 WORKDIR /app
 COPY --from=builder /app/dist ./dist   
-#Copy the static files to the new image
-COPY --from=builder /app/package*.json ./   
-# Copy package files if necessary
+# Copy the static files to the new image
+COPY --from=builder /app/package*.json ./  
+ # Copy package files if necessary
 
+RUN rm -rf node_modules    # Clean existing node_modules folder
 RUN npm install --omit=dev   # Install production dependencies
 
 EXPOSE 5000  
