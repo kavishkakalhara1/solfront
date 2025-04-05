@@ -17,7 +17,7 @@ COPY --from=builder /app/package*.json ./
  # Copy package files if necessary
 
 
-RUN npm install --omit=dev   # Install production dependencies
+#RUN npm install --omit=dev   # Install production dependencies
 
 EXPOSE 5000  
 # Expose port 5000
