@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
+        PATH = "C:\\Windows\\System32\\OpenSSH;C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
     }
 
     stages {
@@ -16,9 +16,14 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'aws_ec2_ssh', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
                     script {
+                        // Fix permissions on the temporary key file
+                        bat """
+                            icacls "%SSH_KEY%" /inheritance:r
+                            icacls "%SSH_KEY%" /grant:r "%USERNAME%:F"
+                        """
                         def cmd = """
-                            ssh -i %SSH_KEY% -o StrictHostKeyChecking=no %SSH_USER%@13.61.21.9 ^
-                            "if ! command -v docker >nul 2>&1; then ^
+                            ssh -i "%SSH_KEY%" -o StrictHostKeyChecking=no %SSH_USER%@13.61.21.9 ^
+                            "if ! command -v docker >/dev/null 2>&1; then ^
                                 echo Docker is not installed. Installing... && ^
                                 sudo apt update && sudo apt install -y docker.io && ^
                                 sudo systemctl start docker && sudo systemctl enable docker && ^
@@ -80,8 +85,13 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'aws_ec2_ssh', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
                     script {
+                        // Fix permissions on the temporary key file
+                        bat """
+                            icacls "%SSH_KEY%" /inheritance:r
+                            icacls "%SSH_KEY%" /grant:r "%USERNAME%:F"
+                        """
                         def deployCmd = """
-                            ssh -i %SSH_KEY% -o StrictHostKeyChecking=no %SSH_USER%@13.61.21.9 ^
+                            ssh -i "%SSH_KEY%" -o StrictHostKeyChecking=no %SSH_USER%@13.61.21.9 ^
                             "sudo docker pull kavishkakalhara/frontend:latest && ^
                              sudo docker stop frontend || exit 0 && ^
                              sudo docker rm -f frontend || exit 0 && ^
