@@ -2,31 +2,26 @@ pipeline {
     agent any
 
     environment {
-        // Docker path for Windows
         PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
     }
 
     stages {
         stage('Check Docker Installation on Jenkins') {
             steps {
-                script {
-                    bat 'docker --version'
-                }
+                bat 'docker --version'
             }
         }
 
         stage('Check and Install Docker on EC2') {
             steps {
-                sshagent(['aws_ec2_ssh']) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'aws_ec2_ssh', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
                     script {
-                        // Use OpenSSH (ssh.exe) instead of Bash
                         def cmd = """
-                            ssh -o StrictHostKeyChecking=no ubuntu@13.61.21.9 ^
+                            ssh -i %SSH_KEY% -o StrictHostKeyChecking=no %SSH_USER%@13.61.21.9 ^
                             "if ! command -v docker >nul 2>&1; then ^
                                 echo Docker is not installed. Installing... && ^
                                 sudo apt update && sudo apt install -y docker.io && ^
-                                sudo systemctl start docker && ^
-                                sudo systemctl enable docker && ^
+                                sudo systemctl start docker && sudo systemctl enable docker && ^
                                 sudo usermod -aG docker ubuntu; ^
                             else ^
                                 echo Docker is already installed on EC2. && ^
@@ -83,11 +78,10 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                sshagent(['aws_ec2_ssh']) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'aws_ec2_ssh', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
                     script {
-                        // Use OpenSSH with Windows batch syntax
                         def deployCmd = """
-                            ssh -o StrictHostKeyChecking=no ubuntu@13.61.21.9 ^
+                            ssh -i %SSH_KEY% -o StrictHostKeyChecking=no %SSH_USER%@13.61.21.9 ^
                             "sudo docker pull kavishkakalhara/frontend:latest && ^
                              sudo docker stop frontend || exit 0 && ^
                              sudo docker rm -f frontend || exit 0 && ^
