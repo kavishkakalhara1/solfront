@@ -20,31 +20,25 @@ pipeline {
         }
 
         stage('Check and Install Docker on EC2') {
-            steps {
-                sshagent(['aws_ec2_ssh']) {
-                    script {
-                        def cmd = '''
-                            ssh -o StrictHostKeyChecking=no ubuntu@13.61.21.9 "
-                                if ! command -v docker &> /dev/null; then
-                                    echo 'Docker is not installed. Installing...';
-                                    sudo apt update && sudo apt install -y docker.io;
-                                    sudo systemctl start docker;
-                                    sudo systemctl enable docker;
-                                    sudo usermod -aG docker ubuntu;
-                                else
-                                    echo 'Docker is already installed on EC2.';
-                                    docker --version;
-                                fi"
-                        '''
-                        if (isUnix()) {
-                            sh cmd
-                        } else {
-                            bat "bash -c \"${cmd.replaceAll('"', '\\"')}\""
-                        }
-                    }
-                }
-            }
+    steps {
+        script {
+            def cmd = '''
+                ssh -o StrictHostKeyChecking=no ubuntu@13.61.21.9 "
+                    if ! command -v docker &> /dev/null; then
+                        echo 'Docker is not installed. Installing...';
+                        sudo apt update && sudo apt install -y docker.io;
+                        sudo systemctl start docker;
+                        sudo systemctl enable docker;
+                        sudo usermod -aG docker ubuntu;
+                    else
+                        echo 'Docker is already installed on EC2.';
+                        docker --version;
+                    fi"
+            '''
+            bat "bash -c \"${cmd.replaceAll('"', '\\"')}\""
         }
+    }
+}
 
         stage('Clone Repository') {
             steps {
