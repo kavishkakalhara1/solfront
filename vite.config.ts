@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     port: 5000,
     host: true,
-    allowedHosts: ['solveitsl.site', 'www.solveitsl.site', '0.0.0.0'],
+    allowedHosts: ['solveitsl.site', 'www.solveitsl.site','localhost', '127.0.0.1'],
     proxy: {
       '/api/': {
         // target: 'http://13.61.21.9:3000',
