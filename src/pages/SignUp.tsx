@@ -21,7 +21,7 @@ function SignUp() {
 
     setLoading(true);
     try {
-      await axios.post('/api/userService/auth/signup', {
+      await axios.post('http://13.61.21.9:3000/api/userService/auth/signup', {
         firstname,
         lastname,
         fullname,
@@ -32,7 +32,7 @@ function SignUp() {
       navigate('/sign-in'); // Navigate to sign-in page on successful sign-up
     } catch (error: unknown) {
       if (axios.isAxiosError(error) && error.response) {
-        toast.error('Signup failed: ' + error.response.data.message);
+        toast.error('Signup failed1: ' + error.response.data.message);
       } else {
         toast.error('Signup failed: An unknown error occurred');
       }

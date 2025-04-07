@@ -21,17 +21,34 @@ function Header() {
   };
 
   return (
-    <header className="z-10 p-4 text-black bg-white shadow-md">
-      <nav className="flex items-center justify-between">
-        <div className='flex justify-items-start'>
-        <div className="text-3xl font-semibold text-teal-500">Solve3</div>
-        <div className="text-3xl font-bold text-gray-700">IT</div>
+    <header className="z-20 p-4 bg-white shadow-md">
+      <nav className="flex items-center justify-between max-w-6xl mx-auto">
+        {/* Logo Section */}
+        <div className="flex items-center space-x-2">
+          <div className="text-3xl font-semibold text-teal-500">Solve3</div>
+          <div className="text-3xl font-bold text-gray-700">IT</div>
         </div>
-        <div className="flex items-center space-x-4">
-          {!currentUser && <Link to="/sign-in" className="text-xl font-medium hover:text-teal-500">Sign In</Link>}
-          {!currentUser && <Link to="/sign-up" className="text-xl font-medium hover:text-teal-500">Sign Up</Link>}
-          {currentUser && (
+
+        {/* Navigation Links */}
+        <div className="flex items-center space-x-6">
+          {!currentUser ? (
+            <>
+              <Link
+                to="/sign-in"
+                className="text-lg font-medium text-gray-700 transition-colors hover:text-teal-500"
+              >
+                Sign In
+              </Link>
+              <Link
+                to="/sign-up"
+                className="px-4 py-2 text-lg font-medium text-white transition-all bg-teal-500 rounded-full shadow-md hover:bg-teal-600"
+              >
+                Sign Up
+              </Link>
+            </>
+          ) : (
             <div className="relative">
+              {/* Profile Picture or Icon */}
               {currentUser.profilePicture ? (
                 <img
                   src={currentUser.profilePicture}
@@ -40,16 +57,24 @@ function Header() {
                   onClick={toggleDropdown}
                 />
               ) : (
-                <FaUserCircle size={40} className="cursor-pointer" onClick={toggleDropdown} />
+                <FaUserCircle
+                  size={40}
+                  className="text-gray-700 cursor-pointer hover:text-teal-500"
+                  onClick={toggleDropdown}
+                />
               )}
+
+              {/* Dropdown Menu */}
               {dropdownVisible && (
-                <div className="absolute right-0 w-48 mt-2 text-black bg-white rounded shadow-lg">
+                <div className="absolute right-0 mt-2 bg-white rounded-lg shadow-lg w-60">
                   <div className="px-4 py-2 border-b">
-                    <p className="font-semibold">{currentUser.fullname}</p>
+                    <p className="font-semibold text-gray-800">{currentUser.fullname}</p>
                     <p className="text-sm text-gray-600">{currentUser.email}</p>
                   </div>
-                  
-                  <button onClick={handleSignOut} className="block w-full px-4 py-2 text-left hover:bg-gray-200">
+                  <button
+                    onClick={handleSignOut}
+                    className="block w-full px-4 py-2 text-left text-gray-700 transition-colors hover:bg-gray-100"
+                  >
                     Sign Out
                   </button>
                 </div>

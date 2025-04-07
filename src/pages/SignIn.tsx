@@ -17,7 +17,8 @@ function SignIn() {
     setError('');
     dispatch(signInStart());
     try {
-      const response = await axios.post('/api/userService/auth/signin', { email, password });
+      const response = await axios.post('http://13.61.21.9:3000/api/userService/auth/signin', { email, password });
+      //const response = await axios.post('http://localhost:3000/api/userService/auth/signin', { email, password });
       dispatch(signInSuccess(response.data));
       navigate('/'); // Navigate to home page on successful sign-in
     } catch (error) {

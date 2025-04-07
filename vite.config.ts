@@ -8,15 +8,18 @@ export default defineConfig({
     host: true,
     proxy: {
       '/api/': {
-        target: 'http://13.61.21.9:3000',
+        // target: 'http://13.61.21.9:3000',
+        target: 'http://localhost:3000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/userService/, ''),
-        secure: false, // Add this if the backend uses self-signed certificates
+        secure: false,
       },
     },
-    allowedHosts: ['solveitsl.site', 'www.solveitsl.site'], // Add this line
+    hmr: {
+      host: 'www.solveitsl.site', // Optional: allow HMR over custom domain
+    },
   },
   preview: {
-    allowedHosts: ['solveitsl.site', 'www.solveitsl.site'], // Add this block
+    allowedHosts: ['solveitsl.site', 'www.solveitsl.site'], // Only for `vite preview`
   },
 });
