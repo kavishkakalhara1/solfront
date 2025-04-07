@@ -21,6 +21,6 @@ export default defineConfig({
     },
   },
   preview: {
-    allowedHosts: ['solveitsl.site', 'www.solveitsl.site'], // Only for `vite preview`
+    allowedHosts: ['solveitsl.site', 'www.solveitsl.site', 'localhost', '127.0.0.1'], // Only for `vite preview`
   },
 });
