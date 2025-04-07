@@ -14,7 +14,6 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist   
 # Copy the static files to the new image
 COPY --from=builder /app/package*.json ./  
-COPY --from=builder /app/vite.config.js ./ 
  # Copy package files if necessary
 
 
