@@ -6,10 +6,9 @@ export default defineConfig({
   server: {
     port: 5000,
     host: true,
-    allowedHosts: ['solveitsl.site', 'www.solveitsl.site','localhost', '127.0.0.1'],
+    allowedHosts: 'all', // This will allow all hosts in development
     proxy: {
       '/api/': {
-        // target: 'http://13.61.21.9:3000',
         target: 'http://localhost:3000',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/userService/, ''),
@@ -17,10 +16,13 @@ export default defineConfig({
       },
     },
     hmr: {
-      host: 'www.solveitsl.site', // Optional: allow HMR over custom domain
+      clientPort: 443, // Add this if you're using HTTPS
+      host: 'www.solveitsl.site',
     },
   },
   preview: {
-    allowedHosts: ['solveitsl.site', 'www.solveitsl.site', 'localhost', '127.0.0.1'], // Only for `vite preview`
+    host: true,
+    port: 5000,
+    allowedHosts: 'all', // This will allow all hosts in preview mode
   },
 });
