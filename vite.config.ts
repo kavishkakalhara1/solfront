@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     port: 5000,
     host: true,
-    allowedHosts: 'all', // This will allow all hosts in development
+    allowedHosts: ['.'], // This will allow all hosts in development
     proxy: {
       '/api/': {
         target: 'http://localhost:3000',
@@ -23,6 +23,6 @@ export default defineConfig({
   preview: {
     host: true,
     port: 5000,
-    allowedHosts: 'all', // This will allow all hosts in preview mode
+    allowedHosts: ['.'], // This will allow all hosts in preview mode
   },
 });
